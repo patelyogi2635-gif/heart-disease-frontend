@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-API_URL = " https://heart-disease-backend-6-q9cc.onrender.com/predict"
+API_URL = "https://heart-disease-backend-6-q9cc.onrender.com/predict"
 
 
 
@@ -47,6 +47,7 @@ if st.button("Predict"):
             st.success("✅ No Heart Disease Detected")
     else:
         st.warning("Backend API not responding")
+
 
 
 
