@@ -1,14 +1,9 @@
 import streamlit as st
 import pandas as pd
-import joblib
 import requests
 API_URL = " https://heart-disease-backend-6-q9cc.onrender.com/predict"
 
 
-# Load saved model, scaler, and expected columns
-model = joblib.load("../backend/KNN_heart.pkl")
-scaler = joblib.load("../backend/scaler.pkl")
-expected_columns = joblib.load("../backend/columns.pkl")
 
 st.title("Heart Stroke Prediction by Yogi Patel")
 st.markdown("Provide the following details to check your heart stroke risk:")
@@ -52,3 +47,4 @@ if st.button("Predict"):
             st.success("✅ No Heart Disease Detected")
     else:
         st.warning("Backend API not responding")
+
