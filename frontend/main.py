@@ -41,7 +41,7 @@ if st.button("Predict"):
 st.write("Prediction probability:", result)
 
 
- try:
+ 
     response = requests.post(API_URL, json=payload, timeout=10)
 
     if response.status_code == 200:
@@ -56,6 +56,7 @@ st.write("Prediction probability:", result)
 
 except Exception as e:
     st.error(f"Connection failed: {e}")
+
 
 
 
