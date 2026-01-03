@@ -1,11 +1,9 @@
 import streamlit as st
-import pandas as pd
 import requests
+
 API_URL = "https://heart-disease-backend-6-q9cc.onrender.com/predict"
 
-
-
-st.title("Heart Stroke Prediction by Yogi Patel")
+st.title("Heart Stroke Prediction by Yogi Patel ❤️")
 st.markdown("Provide the following details to check your heart stroke risk:")
 
 # Collect user input
@@ -36,26 +34,26 @@ if st.button("Predict"):
         "st_slope": st_slope
     }
 
+    try:
+        response = requests.post(API_URL, json=payload, timeout=10)
 
-    
-st.write("Prediction probability:", result)
+        if response.status_code == 200:
+            result = response.json()
 
+            # Optional: show full response
+            st.write("Model Response:", result)
 
- 
-response = requests.post(API_URL, json=payload, timeout=10)
-
-    if response.status_code == 200:
-        result = response.json()
-
-        if result["prediction"] == 1:
-            st.error("⚠️ Heart Disease Detected")
+            if result["prediction"] == 1:
+                st.error("⚠️ Heart Disease Detected")
+            else:
+                st.success("✅ No Heart Disease Detected")
         else:
-            st.success("✅ No Heart Disease Detected")
-    else:
-        st.error(f"Backend Error: {response.text}")
+            st.error(f"Backend Error: {response.text}")
 
-except Exception as e:
-    st.error(f"Connection failed: {e}")
+    except Exception as e:
+        st.error(f"Connection failed: {e}")
+
+
 
 
 
