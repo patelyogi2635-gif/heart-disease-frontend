@@ -36,7 +36,13 @@ if st.button("Predict"):
         "st_slope": st_slope
     }
 
-    response = requests.post(API_URL, json=payload)
+
+    
+st.write("Prediction probability:", result)
+
+
+ try:
+    response = requests.post(API_URL, json=payload, timeout=10)
 
     if response.status_code == 200:
         result = response.json()
@@ -46,7 +52,11 @@ if st.button("Predict"):
         else:
             st.success("✅ No Heart Disease Detected")
     else:
-        st.warning("Backend API not responding")
+        st.error(f"Backend Error: {response.text}")
+
+except Exception as e:
+    st.error(f"Connection failed: {e}")
+
 
 
 
